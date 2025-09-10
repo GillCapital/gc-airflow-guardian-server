@@ -1,0 +1,13 @@
+body {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+.content-wrapper {
+    background-color: #000 !important;
+}
+.badge {
+    background-color: purple !important;
+}
+h1, h2, h3, h4, h5, h6, p, a, span, div, .label {
+    color: #fff !important;
+}
