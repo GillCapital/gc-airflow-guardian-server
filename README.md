@@ -1,5 +1,3 @@
-![Data Monitoring](https://placehold.co/150x150/png?text=Data+Monitoring)
-
 # gc-airflow-guardian-server
 
 This repository is designed to manage and enforce critical aspects of our data ecosystem within the Airflow environment. It encompasses the following key areas:
