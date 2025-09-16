@@ -1,0 +1,11 @@
+[2025-09-16T10:59:52.973+0000] {processor.py:161} INFO - Started process (PID=213) to work on /opt/airflow/dags/bigquery_sales_query_dag.py
+[2025-09-16T10:59:52.978+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/bigquery_sales_query_dag.py for tasks to queue
+[2025-09-16T10:59:52.991+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:52.985+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/bigquery_sales_query_dag.py
+[2025-09-16T10:59:53.158+0000] {processor.py:840} INFO - DAG(s) 'bigquery_sales_query' retrieved from /opt/airflow/dags/bigquery_sales_query_dag.py
+[2025-09-16T10:59:53.653+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:53.651+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:bigquery_sales_query
+[2025-09-16T10:59:53.699+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:53.698+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:bigquery_sales_query
+[2025-09-16T10:59:53.735+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:53.735+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:bigquery_sales_query
+[2025-09-16T10:59:53.738+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:53.738+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-16T10:59:53.789+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:53.788+0000] {dag.py:3118} INFO - Creating ORM DAG for bigquery_sales_query
+[2025-09-16T10:59:53.799+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:53.793+0000] {dag.py:3954} INFO - Setting next_dagrun for bigquery_sales_query to None, run_after=None
+[2025-09-16T10:59:53.933+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/bigquery_sales_query_dag.py took 1.020 seconds

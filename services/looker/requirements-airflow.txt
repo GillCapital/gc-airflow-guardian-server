@@ -1,0 +1,11 @@
+# Airflow 2.9 requirements with Looker dependencies
+
+# Looker SDK
+looker-sdk>=25.0.0
+
+# Google Cloud Storage
+google-cloud-storage>=2.0.0
+
+# Additional dependencies that might be needed
+requests>=2.22.0
+typing-extensions>=4.1.1

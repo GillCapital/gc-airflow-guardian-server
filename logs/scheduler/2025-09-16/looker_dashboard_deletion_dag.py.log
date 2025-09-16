@@ -1,0 +1,11 @@
+[2025-09-16T10:59:27.530+0000] {processor.py:161} INFO - Started process (PID=202) to work on /opt/airflow/dags/looker_dashboard_deletion_dag.py
+[2025-09-16T10:59:27.548+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/looker_dashboard_deletion_dag.py for tasks to queue
+[2025-09-16T10:59:27.563+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:27.559+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/looker_dashboard_deletion_dag.py
+[2025-09-16T10:59:29.709+0000] {processor.py:840} INFO - DAG(s) 'looker_dashboard_deletion' retrieved from /opt/airflow/dags/looker_dashboard_deletion_dag.py
+[2025-09-16T10:59:31.945+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:31.906+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:looker_dashboard_deletion
+[2025-09-16T10:59:31.999+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:31.999+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:looker_dashboard_deletion
+[2025-09-16T10:59:32.069+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:32.068+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:looker_dashboard_deletion
+[2025-09-16T10:59:32.076+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:32.076+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-16T10:59:32.171+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:32.171+0000] {dag.py:3118} INFO - Creating ORM DAG for looker_dashboard_deletion
+[2025-09-16T10:59:32.257+0000] {logging_mixin.py:188} INFO - [2025-09-16T10:59:32.254+0000] {dag.py:3954} INFO - Setting next_dagrun for looker_dashboard_deletion to 2025-08-01 00:00:00+00:00, run_after=2025-09-01 00:00:00+00:00
+[2025-09-16T10:59:32.587+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/looker_dashboard_deletion_dag.py took 5.147 seconds

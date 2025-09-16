@@ -1,0 +1,14 @@
+# Looker Dashboard Soft Deletion Script Dependencies
+
+# Core Looker SDK
+looker-sdk>=25.0.0
+
+# Google Cloud Storage (for future backup functionality)
+google-cloud-storage>=2.0.0
+
+# Standard library dependencies (included with Python)
+# - os
+# - logging
+# - datetime
+# - typing
+# - dataclasses
