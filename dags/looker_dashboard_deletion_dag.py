@@ -48,20 +48,18 @@ def create_config_from_variables():
     try:
         config = Config(
             base_url=Variable.get("LOOKER_BASE_URL", default_var="https://gillcapital.cloud.looker.com/"),
-            client_id=Variable.get("LOOKER_CLIENT_ID", default_var="PPyDTxfQbstpn6smvrhC"),
-            client_secret=Variable.get("LOOKER_CLIENT_SECRET", default_var="vJ4M8T32t5vn6pFNNWSHRHqW"),
-            days_before_soft_delete=int(Variable.get("DAYS_BEFORE_SOFT_DELETE", default_var="180")),
-            days_before_hard_delete=int(Variable.get("DAYS_BEFORE_HARD_DELETE", default_var="180")),
+            gcp_project_id=Variable.get("GCP_PROJECT_ID", default_var="gillcapital-datalake"),
+            secret_name=Variable.get("LOOKER_SECRET_NAME", default_var="looker-pinyapat-client-id-secret"),
+            days_before_soft_delete=int(Variable.get("DAYS_BEFORE_SOFT_DELETE", default_var=180)),
             notification_email=Variable.get("NOTIFICATION_EMAIL", default_var="pinyapat.a@hthai.co.th"),
             gcs_bucket_name=Variable.get("GCS_BUCKET_NAME", default_var="gc_looker_test"),
-            gcp_project_id=Variable.get("GCP_PROJECT_ID", default_var="gillcapital-datamart"),
-            timeout=int(Variable.get("LOOKER_TIMEOUT", default_var="300")),
-            test_mode_limit=int(Variable.get("TEST_MODE_LIMIT", default_var="10")),
+            timeout=int(Variable.get("LOOKER_TIMEOUT", default_var=300)),
+            test_mode_limit=int(Variable.get("TEST_MODE_LIMIT", default_var=10))
         )
         return config
     except Exception as e:
-        print(f"Error creating config from variables: {e}")
-        # Fallback to default config
+        print(f"Error creating config: {e}")
+        # Return default config if variables fail
         return Config()
 
 

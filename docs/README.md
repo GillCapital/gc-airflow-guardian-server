@@ -33,6 +33,7 @@ docs/
 
 ### 🚀 Deployment Documentation
 - **[Infrastructure Guide](deployment/infrastructure-guide.md)** - Deployment strategies, monitoring, and infrastructure management
+- **[GCP Deployment Guide](deployment/gcp-deployment-guide.md)** - Google Cloud Platform Compute Engine deployment with Secret Manager
 
 ## Service Overview
 

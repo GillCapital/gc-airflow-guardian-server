@@ -105,17 +105,25 @@ The Looker service manages dashboard lifecycle and cleanup operations.
 
 #### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `LOOKER_BASE_URL` | Your Looker instance URL | Required |
-| `LOOKER_CLIENT_ID` | Looker API Client ID | Required |
-| `LOOKER_CLIENT_SECRET` | Looker API Client Secret | Required |
-| `DAYS_BEFORE_SOFT_DELETE` | Days of inactivity before soft delete | 180 |
-| `NOTIFICATION_EMAIL` | Email for notifications | Required |
-| `GCS_BUCKET_NAME` | GCS bucket for backups | Optional |
-| `GCP_PROJECT_ID` | GCP Project ID | Optional |
-| `LOOKER_TIMEOUT` | Looker SDK timeout (seconds) | 300 |
-| `TEST_MODE_LIMIT` | Limit for test mode | 10 |
+| Variable | Description | Default | Source |
+|----------|-------------|---------|---------|
+| `LOOKER_BASE_URL` | Your Looker instance URL | Required | Environment Variable |
+| `GCP_PROJECT_ID` | GCP Project ID for Secret Manager | `gillcapital-datalake` | Environment Variable |
+| `LOOKER_SECRET_NAME` | Secret Manager secret name | `looker-pinyapat-client-id-secret` | Environment Variable |
+| `LOOKER_CLIENT_ID` | Looker API Client ID | **From Secret Manager** | Google Cloud Secret Manager |
+| `LOOKER_CLIENT_SECRET` | Looker API Client Secret | **From Secret Manager** | Google Cloud Secret Manager |
+| `DAYS_BEFORE_SOFT_DELETE` | Days of inactivity before soft delete | 180 | Environment Variable |
+| `NOTIFICATION_EMAIL` | Email for notifications | Required | Environment Variable |
+| `GCS_BUCKET_NAME` | GCS bucket for backups | Optional | Environment Variable |
+| `LOOKER_TIMEOUT` | Looker SDK timeout (seconds) | 300 | Environment Variable |
+| `TEST_MODE_LIMIT` | Limit for test mode | 10 | Environment Variable |
+
+#### Security Features
+
+- **🔐 Google Cloud Secret Manager Integration**: Credentials stored securely in GCP Secret Manager
+- **🛡️ Service Account Authentication**: Uses GCP service accounts for secure access
+- **📝 Audit Logging**: All operations logged for compliance and monitoring
+- **🔄 Fallback Mechanism**: Falls back to environment variables for local development
 
 #### Features
 
@@ -225,6 +233,7 @@ Comprehensive documentation is available in the `docs/` directory:
 
 ### 🚀 Deployment Documentation
 - **[Infrastructure Guide](docs/deployment/infrastructure-guide.md)** - Deployment strategies, monitoring, and infrastructure management
+- **[GCP Deployment Guide](docs/deployment/gcp-deployment-guide.md)** - Google Cloud Platform Compute Engine deployment with Secret Manager
 
 ### 📖 Quick Reference
 - **[Documentation Index](docs/README.md)** - Complete documentation overview and navigation

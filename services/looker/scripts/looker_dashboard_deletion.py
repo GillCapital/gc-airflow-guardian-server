@@ -4,9 +4,12 @@ Looker Dashboard Soft Deletion Script
 
 This script automatically identifies and soft deletes Looker dashboards
 that haven't been accessed for more than 6 months (180 days).
+
+Updated to use Google Cloud Secret Manager for secure credential management.
 """
 
 import os
+import json
 import logging
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Union
@@ -16,30 +19,90 @@ import looker_sdk
 from looker_sdk import models40 as models
 from looker_sdk import error as looker_error
 
+# Google Cloud imports
+try:
+    from google.cloud import secretmanager
+    from google.auth import default
+    GCP_AVAILABLE = True
+except ImportError:
+    GCP_AVAILABLE = False
+    print("Warning: Google Cloud libraries not available. Install with: pip install google-cloud-secret-manager")
+
 
 @dataclass
 class Config:
     """Configuration class for the dashboard deletion script."""
     base_url: str = "https://gillcapital.cloud.looker.com/"
-    client_id: str = "PPyDTxfQbstpn6smvrhC"
-    client_secret: str = "vJ4M8T32t5vn6pFNNWSHRHqW"
+    gcp_project_id: str = "gillcapital-datalake"
+    secret_name: str = "looker-pinyapat-client-id-secret"
     days_before_soft_delete: int = 180
     days_before_hard_delete: int = 180
     notification_email: str = "pinyapat.a@hthai.co.th"
     gcs_bucket_name: str = "gc_looker_test"
-    gcp_project_id: str = "gillcapital-datamart"
     timeout: int = 300
     test_mode_limit: int = 10
+    # Credentials will be loaded from Secret Manager
+    client_id: Optional[str] = None
+    client_secret: Optional[str] = None
 
 
 class LookerDashboardManager:
-    """Manages Looker dashboard operations."""
+    """Manages Looker dashboard operations with GCP Secret Manager integration."""
     
     def __init__(self, config: Config):
         """Initialize the Looker SDK with configuration."""
         self.config = config
-        self.sdk = self._initialize_sdk()
         self.logger = self._setup_logging()
+        
+        # Load credentials from Google Cloud Secret Manager
+        self._load_credentials_from_secret_manager()
+        
+        # Initialize SDK after credentials are loaded
+        self.sdk = self._initialize_sdk()
+    
+    def _load_credentials_from_secret_manager(self):
+        """Load Looker credentials from Google Cloud Secret Manager."""
+        try:
+            if not GCP_AVAILABLE:
+                raise ImportError("Google Cloud libraries not available")
+            
+            # Initialize Secret Manager client
+            client = secretmanager.SecretManagerServiceClient()
+            
+            # Construct the secret name
+            secret_name = f"projects/{self.config.gcp_project_id}/secrets/{self.config.secret_name}/versions/latest"
+            
+            self.logger.info(f"Loading credentials from Secret Manager: {secret_name}")
+            
+            # Access the secret
+            response = client.access_secret_version(request={"name": secret_name})
+            secret_data = response.payload.data.decode("UTF-8")
+            
+            # Parse JSON secret
+            credentials = json.loads(secret_data)
+            
+            # Set credentials in config
+            self.config.client_id = credentials.get("client_id")
+            self.config.client_secret = credentials.get("client_secret")
+            
+            if not self.config.client_id or not self.config.client_secret:
+                raise ValueError("Invalid credentials format in Secret Manager")
+            
+            self.logger.info("Successfully loaded credentials from Secret Manager")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to load credentials from Secret Manager: {e}")
+            # Fallback to environment variables for local development
+            self.config.client_id = os.getenv("LOOKER_CLIENT_ID")
+            self.config.client_secret = os.getenv("LOOKER_CLIENT_SECRET")
+            
+            if not self.config.client_id or not self.config.client_secret:
+                raise ValueError(
+                    "Could not load credentials from Secret Manager or environment variables. "
+                    "Ensure you have proper GCP authentication and the secret exists."
+                )
+            
+            self.logger.warning("Using environment variables as fallback")
     
     def _initialize_sdk(self):
         """Initialize and configure the Looker SDK."""
@@ -55,7 +118,7 @@ class LookerDashboardManager:
         
         try:
             sdk = looker_sdk.init40()
-            print('Looker SDK 4.0 initialized successfully.')
+            self.logger.info('Looker SDK 4.0 initialized successfully with GCP Secret Manager credentials.')
             return sdk
         except Exception as e:
             raise RuntimeError(f"Failed to initialize Looker SDK: {e}")
