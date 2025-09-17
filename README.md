@@ -16,9 +16,13 @@ gc-airflow-guardian-server/
 │       ├── config/                 # Configuration files
 │       ├── docs/                   # Service-specific documentation
 │       └── requirements-airflow.txt
+├── docs/                          # Comprehensive system documentation
+│   ├── architecture/              # System architecture and diagrams
+│   ├── dataops/                   # DataOps practices and runbooks
+│   └── deployment/                # Infrastructure and deployment guides
 ├── plugins/                        # Airflow plugins and themes
 │   └── my_theme_plugin/
-├── config/                         # Global configuration (to be created)
+├── config/                         # Global configuration
 ├── logs/                          # Airflow logs (auto-generated)
 ├── docker-compose.yml             # Docker Compose configuration
 ├── Dockerfile                     # Custom Airflow image
@@ -208,6 +212,24 @@ To add a new service (e.g., `bigquery_retention`):
 
 ## 📚 Documentation
 
+Comprehensive documentation is available in the `docs/` directory:
+
+### 🏗️ Architecture Documentation
+- **[System Architecture](docs/architecture/system-architecture.md)** - High-level system design and component relationships
+- **[DAG Dependencies](docs/architecture/dag-dependencies.md)** - DAG scheduling, dependencies, and execution flow
+- **[Data Flow](docs/architecture/data-flow.md)** - Data processing pipelines and service interactions
+
+### 🔧 DataOps Documentation
+- **[DataOps Principles](docs/dataops/README.md)** - DataOps methodology, best practices, and team collaboration
+- **[Operational Runbook](docs/dataops/operational-runbook.md)** - Daily operations, troubleshooting, and maintenance procedures
+
+### 🚀 Deployment Documentation
+- **[Infrastructure Guide](docs/deployment/infrastructure-guide.md)** - Deployment strategies, monitoring, and infrastructure management
+
+### 📖 Quick Reference
+- **[Documentation Index](docs/README.md)** - Complete documentation overview and navigation
+
+### Service-Specific Documentation
 - [Looker Service Documentation](services/looker/docs/README.md)
 - [Airflow Setup Guide](services/looker/docs/AIRFLOW_SETUP.md)
 
